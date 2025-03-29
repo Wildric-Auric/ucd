@@ -69,6 +69,40 @@ void pop(char* dst, int index) {
     truncFile(cachePath,1);
 }
 
-void execCmds() {
+void install() {
 
+}
+
+void uninstall() {
+
+}
+
+void log(int depth) {
+    char txt[CHUNK_BYTE_SIZE];
+    FILE* f;
+    int fs = getFileSize(cachePath);
+    fopen_s(&f, cachePath, "r");
+    for (int i = fs / CHUNK_BYTE_SIZE; i < fs / CHUNK_BYTE_SIZE; i) { 
+        fread(txt, sizeof(char), CHUNK_BYTE_SIZE, f);
+    }
+    
+}
+
+extern void displayHelpMsg();
+void execCmds() {
+    if (cmds[CMD_HELP] == 1) {
+        displayHelpMsg();
+        return;
+    }
+    if (cmds[CMD_INSTALL] == 1) {
+        install();
+        return;
+    }
+    if (cmds[CMD_UNINSTALL] == 1) {
+        uninstall();
+        return;
+    }
+    if (cmds[CMD_LOG]) {
+        log(0);
+    }
 }

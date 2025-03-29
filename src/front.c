@@ -39,27 +39,27 @@ void sendCmd(int n, char** c) {
         }
 
         if (SCMP2(c[i], "--stack", "-s")) {
-
+            cmds[CMD_STACK] = 1;
         }
         
         if (SCMP2(c[i], "--unstack", "-u")) {
-
+            cmds[CMD_UNSTACK] = 1;
         }
 
         if (SCMP2(c[i], "--peek", "-p")) {
-
+            cmds[CMD_PEEK] = 1;
         }
 
         if (SCMP2(c[i], "--log", "-l")) {
-
+            cmds[CMD_LOG] = 1;
         }
 
         if (SCMP(c[i], "--install")) {
-
+            cmds[CMD_INSTALL] = 1;
         }
 
         if (SCMP(c[i], "--uninstall")) {
-
+            cmds[CMD_UNINSTALL] = 1;
         }
 
         else if (!dirPassed) {
