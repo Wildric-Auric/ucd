@@ -7,9 +7,11 @@
 #define CMD_LOG 6
 #define CMD_INSTALL 7
 #define CMD_UNINSTALL 8
+#define CMD_UNSTACK1
 
 
 
+extern const int CHUNK_BYTE_SIZE;
 
 extern long long cmds[64];
 
@@ -27,4 +29,4 @@ void install();
 
 void uninstall();
 
-void log(int depth);
+void ulog(int depth);

@@ -69,7 +69,7 @@ void sendCmd(int n, char** c) {
         }
 
         else {
-            printf("Ignored unknown argument: %s", c[i]); 
+            printf("Ignored unknown argument: %s\n", c[i]); 
         }
     }
     execCmds();

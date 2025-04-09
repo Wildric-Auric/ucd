@@ -1,8 +1,12 @@
 
 void getCurDir(char* dst);
 
-void truncFile(const char* path,int index);
+int truncFile(const char* path,int index);
 
 int getFileSize(const char* path);
 
-void createPath(const char* path);
+int createPath(const char* path);
+
+int createFile(const char*);
+
+int createDirectory(const char*);
