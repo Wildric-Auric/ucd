@@ -11,3 +11,7 @@ int getFileSize(const char* path) {
 void truncFile(const char* path,int index) {
 
 }
+
+void createPath(const char* path) {
+
+}

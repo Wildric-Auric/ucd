@@ -1,30 +1,30 @@
 #include "front.h"
 #include "print.h"
 #include "ucd.h"
-#include <cstring>
+#include <string.h>
 
 static const char* generalMsg = 
-R"V0G0N(
-Uber cd, a simple improved cd command to navigate quicker.
--------------------------------------------------
-Usage: 
-    ucd [opt] "directory"
-Example:
-    ucd --help
-    for more details.
-)V0G0N";
+""
+"Uber cd, a simple improved cd command to navigate quicker."  "\n"
+"-------------------------------------------------"  "\n"
+"Usage: "  "\n"
+"    ucd [opt] \"directory\""  "\n"
+"Example:"  "\n"
+"    ucd --help"  "\n"
+"    for more details."  "\n"
+"";
 
 static const char* helpMsg= 
-R"V0G0N(
-Uber cd, a simple improved cd command to navigate quicker.
--------------------------------------------------
-Usage: 
-    ucd [opt] "directory"
-opt:
-    --help      show this help.
-    -s          stash current directory.
-    -p [n]      pop [n]'th last stashed directory.
-)V0G0N";
+""
+"Uber cd, a simple improved cd command to navigate quicker."  "\n"
+"-------------------------------------------------"  "\n"
+"Usage: "  "\n"
+"    ucd [opt] \"directory\""  "\n"
+"opt:"  "\n"
+"    --help      show this help."  "\n"
+"    -s          stash current directory."  "\n"
+"    -p [n]      pop [n]'th last stashed directory."  "\n"
+"";
 
 #define SCMP(a,b) (!strcmp(a,b))
 #define SCMP2(a,b,c) SCMP(a,b) || SCMP(a,c)

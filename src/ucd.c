@@ -1,9 +1,9 @@
 #include "ucd.h"
 #include "ospec.h"
-#include <cstdlib>
+#include <stdlib.h>
 #include <stdarg.h>
-#include <cstdio>
-#include <cstring>
+#include <stdio.h>
+#include <string.h>
 
 #define CHUNK_BYTE_SIZE 512
 
@@ -74,7 +74,7 @@ void install() {
 }
 
 void uninstall() {
-
+    remove("ucd.exe");
 }
 
 void log(int depth) {
@@ -82,10 +82,9 @@ void log(int depth) {
     FILE* f;
     int fs = getFileSize(cachePath);
     fopen_s(&f, cachePath, "r");
-    for (int i = fs / CHUNK_BYTE_SIZE; i < fs / CHUNK_BYTE_SIZE; i) { 
+    for (int i = fs / CHUNK_BYTE_SIZE; i < fs - fs / CHUNK_BYTE_SIZE; ++i) { 
         fread(txt, sizeof(char), CHUNK_BYTE_SIZE, f);
-    }
-    
+    } 
 }
 
 extern void displayHelpMsg();

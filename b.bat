@@ -1,2 +1,2 @@
 @echo off
-clang ./src/*.cpp -o ucd.exe
+clang ./src/*.c -o ucd.exe
