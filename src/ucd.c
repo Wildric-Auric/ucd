@@ -15,7 +15,7 @@ long long cmds[64] = {0};
 
 void mexec(const char* cmd,...) {
     va_list args;
-    char fnl[512]; 
+    char fnl[CHUNK_BYTE_SIZE]; 
     const char* arg;
     int p = 0;
     int i = 0;
@@ -104,15 +104,6 @@ void peek(int index) {
     
     saveMoveDir(dst);
 
-}
-
-void install() {
-    createFile(cachePath);
-    createFile(pathPath);
-}
-
-void uninstall() {
-    remove("ucd.exe");
 }
 
 void ulog(int depth) {
