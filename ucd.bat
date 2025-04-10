@@ -16,4 +16,3 @@ if defined l (
     cd %l%
 )
 type nul > "%pathPath%"
-

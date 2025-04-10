@@ -13,32 +13,6 @@ char* pathPath  = 0;
 
 long long cmds[64] = {0};
 
-void mexec(const char* cmd,...) {
-    va_list args;
-    char fnl[CHUNK_BYTE_SIZE]; 
-    const char* arg;
-    int p = 0;
-    int i = 0;
-    char c = 0;
-    
-    while ((c=cmd[i++])) {
-        fnl[p++] = c;
-    }
-    va_start(args, cmd); 
-    fnl[p++] = ' ';
-    while ((arg=va_arg(args,const char*))) {
-        i = 0;
-        c = 0;
-        while ((c=arg[i++])) {
-            fnl[p++] = c;
-        }
-        fnl[p++] = ' '; 
-    } 
-    fnl[p] = 0;
-    va_end(args);    
-    system(fnl);
-}
-
 void stash(const char* st) {
     char s[CHUNK_BYTE_SIZE];
     char c = 0; int i = 0; int p = 0;
@@ -46,10 +20,9 @@ void stash(const char* st) {
     while ((c=st[i++]))
         s[p++] = c;
     s[p] = 0;
-
-    fopen_s(&f, cachePath, "ab");
+ 
+    f = fopen(cachePath, "ab");
     fwrite(s, sizeof(char), CHUNK_BYTE_SIZE, f);
-    //fwrite("\n", sizeof(char), 1, f);
     fclose(f);
 }
 
@@ -65,7 +38,7 @@ void pop(char* dst, int index) {
     FILE* f;
     int fs = getFileSize(cachePath);
     truncFile(cachePath,index);
-    fopen_s(&f, cachePath, "rb"); 
+    f = fopen(cachePath, "rb"); 
     fseek(f, (fs-index*CHUNK_BYTE_SIZE) - CHUNK_BYTE_SIZE, 0);
     fread(dst, sizeof(char), CHUNK_BYTE_SIZE, f);
     fclose(f);
@@ -73,8 +46,7 @@ void pop(char* dst, int index) {
 }
 
 void saveMoveDir(const char* dst) {
-    FILE* f;
-    fopen_s(&f, pathPath, "wb");
+    FILE* f = fopen(pathPath, "wb");
     char c;
     int i=0;
     while ((c=dst[i++])) {}
@@ -97,7 +69,7 @@ void peek(int index) {
     int fs = getFileSize(cachePath);
     int offset = fs - (index+1) * CHUNK_BYTE_SIZE;
 
-    fopen_s(&f, cachePath, "rb");
+    f = fopen(cachePath, "rb");
     fseek(f, offset, 0);
     fread(dst, sizeof(char), CHUNK_BYTE_SIZE, f);
     fclose(f);
@@ -111,12 +83,13 @@ void ulog(int depth) {
     FILE* f;
     int fs  = getFileSize(cachePath);
     int off = (depth < 0) ? 0 : fs - depth * CHUNK_BYTE_SIZE;
-    fopen_s(&f, cachePath, "rb");
+    f = fopen(cachePath, "rb");
     fseek(f, off, 0);
     for (int i = 0; i < fs / CHUNK_BYTE_SIZE && (i < depth || depth < 0) ; ++i) { 
         fread(txt, sizeof(char), CHUNK_BYTE_SIZE, f);
         printf("%d: %s\n", i, txt);
     } 
+    fclose(f);
 }
 
 extern void displayHelpMsg();
@@ -126,11 +99,9 @@ void execCmds() {
         return;
     }
     if (cmds[CMD_INSTALL] == 1) {
-        install();
         return;
     }
     if (cmds[CMD_UNINSTALL] == 1) {
-        uninstall();
         return;
     }
     if (cmds[CMD_STACK] == 1) {

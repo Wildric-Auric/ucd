@@ -19,8 +19,6 @@ extern const int CHUNK_BYTE_SIZE;
 
 extern long long cmds[64];
 
-void mexec(const char* cmd,...);
-
 void stash(const char*);
 
 void stashCur();
@@ -28,9 +26,5 @@ void stashCur();
 void pop(char* dst, int index);
 
 void execCmds();
-
-void install();
-
-void uninstall();
 
 void ulog(int depth);
