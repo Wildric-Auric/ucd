@@ -32,7 +32,7 @@ static const char* helpMsg=
 "    -u | --unstack [n] pop [n] last stacked directories. Then pop the next one and move to it."    "\n"
 "    -l | --log  [n]    outputs [n] directories of the the stack, starting from the back."          "\n"
 "                       If [n] is not passed, the whole stack is output."                           "\n"
-"    -p | --peek [n]    Move to [n]'th (or last if not passed) directory of the stack without popping. (Not implemented)" "\n"
+"    -p | --peek [n]    Move to [n]'th (or last if not passed) directory of the stack without popping." "\n"
 "\n"
 "";
 
@@ -65,6 +65,14 @@ void sendCmd(int n, char** c) {
 
         else if (SCMP2(c[i], "--peek", "-p")) {
             cmds[CMD_PEEK] = 1;
+            cmds[CMD_PEEK1] = 0;
+            if (i+1 >= n) continue;
+            const char* num = c[i+1];
+            if (num[0] == '-') continue;
+            int ret = atoi(c[i+1]);
+            if (ret == 0) continue;
+            cmds[CMD_PEEK1] = ret;
+            ++i;
         }
 
         else if (SCMP2(c[i], "--log", "-l")) {

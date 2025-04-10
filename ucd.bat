@@ -5,7 +5,6 @@ set "origin=%localappdata%/ucd/"
 set "cachePath=%origin%ucd"
 set "pathPath=%origin%tmp"
 
-echo %origin%
 if not exist "%origin%" mkdir "%origin%"
 if not exist "%cachePath%" type nul > "%cachePath%"
 if not exist "%pathPath%" type nul > "%pathPath%"

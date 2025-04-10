@@ -72,13 +72,8 @@ void pop(char* dst, int index) {
     printf("pop trunc ret: %d\n", truncFile(cachePath,1)); 
 }
 
-void popAndSave(int index) {
-    char dst[512];
-    dst[0] = 0;
-    pop(dst,index);
-    printf("popAndSave path: %s\n", dst);
+void saveMoveDir(const char* dst) {
     FILE* f;
-    int fs = getFileSize(cachePath);
     fopen_s(&f, pathPath, "wb");
     char c;
     int i=0;
@@ -87,7 +82,27 @@ void popAndSave(int index) {
     fclose(f);
 }
 
+void popAndSave(int index) {
+    char dst[CHUNK_BYTE_SIZE];
+    dst[0] = 0;
+    pop(dst,index);
+    printf("popAndSave path: %s\n", dst);
+    saveMoveDir(dst);
+}
+
 void peek(int index) {
+    char dst[CHUNK_BYTE_SIZE];
+    dst[0] = 0;
+    FILE* f;
+    int fs = getFileSize(cachePath);
+    int offset = fs - (index+1) * CHUNK_BYTE_SIZE;
+
+    fopen_s(&f, cachePath, "rb");
+    fseek(f, offset, 0);
+    fread(dst, sizeof(char), CHUNK_BYTE_SIZE, f);
+    fclose(f);
+    
+    saveMoveDir(dst);
 
 }
 
