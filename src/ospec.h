@@ -1,3 +1,8 @@
+#pragma once
+
+typedef unsigned char osbool;
+
+osbool isDirectory(const char* dir);
 
 void getCurDir(char* dst);
 

@@ -14,7 +14,6 @@ void getCurDir(char* dst) {
 #endif
 }
 
-//TODO::ERROR CHECK
 int getFileSize(const char* path) {
 #ifdef WIN_IMPL
     WIN32_FIND_DATA fd;
@@ -23,7 +22,7 @@ int getFileSize(const char* path) {
     FindClose(h);
     return fd.nFileSizeLow;  
 #endif 
-    return 5;
+    return 0;
 }
 
 int truncFile(const char* path,int index) {
@@ -72,6 +71,15 @@ int createPath(const char* path) {
 #ifdef WIN_IMPL
     createDirectory(path);
     createFile(path);
+#endif
+    return 0;
+}
+
+osbool isDirectory(const char* dir) {
+#ifdef WIN_IMPL
+    DWORD fattrib = GetFileAttributesA(dir);
+    return fattrib != INVALID_FILE_ATTRIBUTES 
+       && (fattrib & FILE_ATTRIBUTE_DIRECTORY);
 #endif
     return 0;
 }

@@ -1,2 +1,2 @@
 @echo off
-clang ./src/*.c -o ucd.exe
+clang -Os ./src/*.c -o _internal_ucd.exe
