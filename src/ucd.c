@@ -81,11 +81,13 @@ void ulog(int depth) {
     FILE* f;
     int fs  = getFileSize(cachePath);
     int off = (depth < 0) ? 0 : fs - depth * CHUNK_BYTE_SIZE;
+    int len = fs / CHUNK_BYTE_SIZE;
+    int offidx = (depth < 0 || depth >= len) ? 0 : fs / CHUNK_BYTE_SIZE - depth;
     f = fopen(cachePath, "rb");
     fseek(f, off, 0);
-    for (int i = 0; i < fs / CHUNK_BYTE_SIZE && (i < depth || depth < 0) ; ++i) { 
+    for (int i = 0; i < len && (i < depth || depth < 0) ; ++i) { 
         fread(txt, sizeof(char), CHUNK_BYTE_SIZE, f);
-        printf("%d: %s\n", i, txt);
+        printf("%d: %s\n", len-1-i-offidx, txt);
     } 
     fclose(f);
 }
