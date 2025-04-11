@@ -1,6 +1,8 @@
 #include "ospec.h"
+
+//Define in as preprocessor macro or here
 //#define WIN_IMPL
-#define LINUX_IMPL
+//#define LINUX_IMPL
 
 #ifdef WIN_IMPL
 #include <windows.h>

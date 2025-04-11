@@ -1,2 +1,2 @@
 @echo off
-clang -Os ./src/*.c -o _internal_ucd.exe
+clang -Os -DWIN_IMPL -D_CRT_SECURE_NO_WARNINGS ./src/*.c -o _internal_ucd.exe
