@@ -30,7 +30,6 @@ void stashCur() {
     char dir[CHUNK_BYTE_SIZE];
     dir[0] = 0;
     getCurDir(dir);
-    printf("stahCur: %s | fileSize: %d\n", dir, getFileSize(cachePath));
     stash(dir);
 }
 
@@ -42,7 +41,7 @@ void pop(char* dst, int index) {
     fseek(f, (fs-index*CHUNK_BYTE_SIZE) - CHUNK_BYTE_SIZE, 0);
     fread(dst, sizeof(char), CHUNK_BYTE_SIZE, f);
     fclose(f);
-    printf("pop trunc ret: %d\n", truncFile(cachePath,1)); 
+    truncFile(cachePath,1);
 }
 
 void saveMoveDir(const char* dst) {
@@ -58,7 +57,6 @@ void popAndSave(int index) {
     char dst[CHUNK_BYTE_SIZE];
     dst[0] = 0;
     pop(dst,index);
-    printf("popAndSave path: %s\n", dst);
     saveMoveDir(dst);
 }
 
@@ -98,19 +96,19 @@ void execCmds() {
         displayHelpMsg();
         return;
     }
-    if (cmds[CMD_INSTALL] == 1) {
-        return;
-    }
-    if (cmds[CMD_UNINSTALL] == 1) {
-        return;
-    }
+
     if (cmds[CMD_STACK] == 1) {
-        if (cmds[CMD_MV] == 1) {
-            stash((const char*)cmds[CMD_MV1]);
-            return;
+        if (cmds[CMD_STACK1]) {
+            stash((const char*)cmds[CMD_STACK1]);
         }
-        stashCur();
+        else
+            stashCur();
     }
+
+    if (cmds[CMD_MV] == 1) {
+        saveMoveDir((const char*)cmds[CMD_MV1]);
+    }
+
     if (cmds[CMD_UNSTACK] == 1) {
         popAndSave(cmds[CMD_UNSTACK1]);
     }

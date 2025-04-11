@@ -12,8 +12,10 @@
 #define CMD_UNSTACK1  9
 #define CMD_LOG1 10
 #define CMD_PEEK1 12
+#define CMD_STACK1 13
 
 
+#define dprintf(...) printf(__VA_ARGS__)
 
 extern const int CHUNK_BYTE_SIZE;
 

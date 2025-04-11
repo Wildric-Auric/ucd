@@ -26,13 +26,13 @@ static const char* helpMsg=
 "Usage: "  "\n"
 "    ucd [opt] \"directory\""  "\n"
 "opt:"  "\n"
-"    -h | --help        show this help."  "\n"
-"    -s | --stack       stack current directory if \"directory\" is not passed or does not exist."  "\n"
-"                       Otherwise \"directory\" is stacked"  "\n"
-"    -u | --unstack [n] pop [n] last stacked directories. Then pop the next one and move to it."    "\n"
-"    -l | --log  [n]    outputs [n] directories of the the stack, starting from the back."          "\n"
-"                       If [n] is not passed, the whole stack is output."                           "\n"
-"    -p | --peek [n]    Move to [n]'th (or last if not passed) directory of the stack without popping." "\n"
+"    -h | --help         show this help."  "\n"
+"    -s | --stack [path] stack current directory if \"path\" is not passed or does not exist."  "\n"
+"                        Otherwise \"path\" is stacked"  "\n"
+"    -u | --unstack [n]  pop [n] last stacked directories. Then pop the next one and move to it."    "\n"
+"    -l | --log  [n]     outputs [n] directories of the the stack, starting from the back."          "\n"
+"                        If [n] is not passed, the whole stack is output."                           "\n"
+"    -p | --peek [n]     Move to [n]'th (or last if not passed) directory of the stack without popping." "\n"
 "\n"
 "";
 
@@ -50,6 +50,12 @@ void sendCmd(int n, char** c) {
 
         else if (SCMP2(c[i], "--stack", "-s")) {
             cmds[CMD_STACK] = 1;
+            if (i+1 >= n) continue;
+            const char* path = c[i+1];
+            if (path[0] == '-') continue;
+            if (!isDirectory(path)) continue;
+            cmds[CMD_STACK1] = (long long)path;
+            ++i;
         }
         
         else if (SCMP2(c[i], "--unstack", "-u")) {
