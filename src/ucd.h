@@ -14,9 +14,6 @@
 #define CMD_PEEK1 12
 #define CMD_STACK1 13
 
-
-#define dprintf(...) printf(__VA_ARGS__)
-
 extern const int CHUNK_BYTE_SIZE;
 
 extern long long cmds[64];

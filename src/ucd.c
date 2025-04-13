@@ -1,10 +1,10 @@
-
-#include "ucd.h"
-#include "ospec.h"
 #include <stdlib.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
+
+#include "ospec.h"
+#include "ucd.h"
 
 const int CHUNK_BYTE_SIZE = 512;
 
