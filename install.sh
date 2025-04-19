@@ -17,9 +17,21 @@ if [ -f "${UCD_PATH}_internal_ucd" ]; then
     SRC_BIN="${UCD_PATH}_internal_ucd" 
 fi
 
+
+# Check if the binary exists, and if not, run the build script
 if [ ! -f "$SRC_BIN" ]; then
-    echo "Error: Binary not found, you need to recompile or get the binary."
-    exit 3
+    echo "Binary not found. Attempting to build it..."
+    if [ -f "./build.sh" ]; then
+        chmod +x ./build.sh
+        ./build.sh
+        if [ ! -f "$SRC_BIN" ]; then
+            echo "Error: Build failed or binary still not found."
+            exit 3
+        fi
+    else
+        echo "Error: Build script (build.sh) not found."
+        exit 3
+    fi
 fi
 
 # Detect the shell using the SHELL environment variable
