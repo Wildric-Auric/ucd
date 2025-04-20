@@ -43,7 +43,7 @@ case "$SHELL" in
         SHELL_RC="$HOME/.bashrc"
         ;;
     *)
-        echo "Unsupported shell. Please use bash or zsh."
+        echo "Unsupported shell. Please try manual installation."
         exit 4
         ;;
 esac
