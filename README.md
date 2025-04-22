@@ -11,6 +11,10 @@
         <img src="https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black" /></a>
     <a href="https://github.com/Wildric-Auric/ucd/edit/main/README.md#windows" alt="Windows">
         <img src="https://custom-icon-badges.demolab.com/badge/Windows-0078D6?logo=windows11&logoColor=white"/></a>
+    <a href="http://github.com/Wildric-Auric/ucd/stargazers" alt="stars">
+        <img src="https://img.shields.io/github/stars/Wildric-Auric/ucd?style=flat"/></a>
+    <a href="https://github.com/Wildric-Auric/ucd/forks" alt="forks">
+        <img src="https://img.shields.io/github/forks/Wildric-Auric/ucd?style=flat"/></a>
     <a href= "https://buymeacoffee.com/wildric" alt="Windows">
         <img src= "https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?&logo=buy-me-a-coffee&logoColor=black" /></a>
 </p>
